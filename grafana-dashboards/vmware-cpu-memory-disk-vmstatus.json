@@ -1,0 +1,149 @@
+{
+    "__inputs": [],
+    "__requires": [],
+    "annotations": {
+        "list": []
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": null,
+    "iteration": 1620000000000,
+    "links": [],
+    "panels": [
+        {
+            "datasource": "Prometheus",
+            "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 0,
+                "y": 0
+            },
+            "id": 1,
+            "title": "VMware CPU Usage %",
+            "type": "timeseries",
+            "targets": [
+                {
+                    "expr": "vmware_vm_cpu_usage_percent{instance=~\".*\"}",
+                    "legendFormat": "{{vm_name}}",
+                    "refId": "A"
+                }
+            ]
+        },
+        {
+            "datasource": "Prometheus",
+            "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 12,
+                "y": 0
+            },
+            "id": 2,
+            "title": "VMware Memory Usage %",
+            "type": "timeseries",
+            "targets": [
+                {
+                    "expr": "vmware_vm_memory_usage_percent{instance=~\".*\"}",
+                    "legendFormat": "{{vm_name}}",
+                    "refId": "A"
+                }
+            ]
+        },
+        {
+            "datasource": "Prometheus",
+            "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 0,
+                "y": 8
+            },
+            "id": 3,
+            "title": "VMware Disk Usage %",
+            "type": "timeseries",
+            "targets": [
+                {
+                    "expr": "vmware_vm_disk_usage_percent{instance=~\".*\"}",
+                    "legendFormat": "{{vm_name}}",
+                    "refId": "A"
+                }
+            ]
+        },
+        {
+            "datasource": "Prometheus",
+            "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 12,
+                "x": 12,
+                "y": 8
+            },
+            "id": 4,
+            "title": "VMware VM Status",
+            "type": "stat",
+            "targets": [
+                {
+                    "expr": "vmware_vm_power_state{instance=~\".*\"}",
+                    "legendFormat": "{{vm_name}}",
+                    "refId": "A"
+                }
+            ]
+        },
+        {
+            "datasource": "Prometheus",
+            "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 24,
+                "x": 0,
+                "y": 16
+            },
+            "id": 5,
+            "title": "VMware VM Error Percentage",
+            "type": "timeseries",
+            "targets": [
+                {
+                    "expr": "vmware_vm_error_percentage{instance=~\".*\"}",
+                    "legendFormat": "{{vm_name}}",
+                    "refId": "A"
+                }
+            ]
+        }
+    ],
+    "refresh": "30s",
+    "schemaVersion": 30,
+    "style": "dark",
+    "tags": [
+        "vmware",
+        "infrastructure"
+    ],
+    "templating": {
+        "list": []
+    },
+    "time": {
+        "from": "now-6h",
+        "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "VMware Infrastructure Overview",
+    "uid": null,
+    "version": 1
+}
