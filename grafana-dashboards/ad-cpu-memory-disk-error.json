@@ -1,0 +1,84 @@
+{
+  "__inputs": [],
+  "__requires": [],
+  "annotations": {"list": []},
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": null,
+  "iteration": 1620000000000,
+  "links": [],
+  "panels": [
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {"defaults": {}, "overrides": []},
+      "gridPos": {"h": 8, "w": 8, "x": 0, "y": 0},
+      "id": 1,
+      "title": "AD CPU Usage %",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "100 - (avg by(instance) (rate(windows_cpu_time_total{mode=\"idle\"}[5m])) * 100)",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {"defaults": {}, "overrides": []},
+      "gridPos": {"h": 8, "w": 8, "x": 8, "y": 0},
+      "id": 2,
+      "title": "AD Memory Usage %",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "(1 - (windows_memory_available_bytes / windows_memory_total_bytes)) * 100",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {"defaults": {}, "overrides": []},
+      "gridPos": {"h": 8, "w": 8, "x": 16, "y": 0},
+      "id": 3,
+      "title": "AD Disk Usage %",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "100 * (windows_logical_disk_size_bytes - windows_logical_disk_free_bytes) / windows_logical_disk_size_bytes",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {"defaults": {}, "overrides": []},
+      "gridPos": {"h": 8, "w": 24, "x": 0, "y": 8},
+      "id": 4,
+      "title": "AD Error Percentage (example)",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "sum(rate(windows_service_status{status=\"error\"}[5m])) by (instance)",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ]
+    }
+  ],
+  "refresh": "30s",
+  "schemaVersion": 30,
+  "style": "dark",
+  "tags": ["ad", "windows", "infrastructure"],
+  "templating": {"list": []},
+  "time": {"from": "now-6h", "to": "now"},
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Active Directory Infrastructure Overview",
+  "uid": null,
+  "version": 1
+}

@@ -1,0 +1,127 @@
+{
+    "__inputs": [],
+    "__requires": [],
+    "annotations": {
+        "list": []
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": null,
+    "iteration": 1620000000000,
+    "links": [],
+    "panels": [
+        {
+            "datasource": "Prometheus",
+            "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 8,
+                "x": 0,
+                "y": 0
+            },
+            "id": 1,
+            "title": "RHEL CPU Usage %",
+            "type": "timeseries",
+            "targets": [
+                {
+                    "expr": "100 - (avg by(instance) (rate(node_cpu_seconds_total{mode=\"idle\"}[5m])) * 100)",
+                    "legendFormat": "{{instance}}",
+                    "refId": "A"
+                }
+            ]
+        },
+        {
+            "datasource": "Prometheus",
+            "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 8,
+                "x": 8,
+                "y": 0
+            },
+            "id": 2,
+            "title": "RHEL Memory Usage %",
+            "type": "timeseries",
+            "targets": [
+                {
+                    "expr": "(1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100",
+                    "legendFormat": "{{instance}}",
+                    "refId": "A"
+                }
+            ]
+        },
+        {
+            "datasource": "Prometheus",
+            "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 8,
+                "x": 16,
+                "y": 0
+            },
+            "id": 3,
+            "title": "RHEL Disk Usage %",
+            "type": "timeseries",
+            "targets": [
+                {
+                    "expr": "100 * (node_filesystem_size_bytes{mountpoint=\"/\"} - node_filesystem_free_bytes{mountpoint=\"/\"}) / node_filesystem_size_bytes{mountpoint=\"/\"}",
+                    "legendFormat": "{{instance}}",
+                    "refId": "A"
+                }
+            ]
+        },
+        {
+            "datasource": "Prometheus",
+            "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 8,
+                "w": 24,
+                "x": 0,
+                "y": 8
+            },
+            "id": 4,
+            "title": "RHEL Error Percentage (example)",
+            "type": "timeseries",
+            "targets": [
+                {
+                    "expr": "sum(rate(node_systemd_unit_state{state=\"failed\"}[5m])) by (instance)",
+                    "legendFormat": "{{instance}}",
+                    "refId": "A"
+                }
+            ]
+        }
+    ],
+    "refresh": "30s",
+    "schemaVersion": 30,
+    "style": "dark",
+    "tags": [
+        "rhel",
+        "linux",
+        "infrastructure"
+    ],
+    "templating": {
+        "list": []
+    },
+    "time": {
+        "from": "now-6h",
+        "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "browser",
+    "title": "RHEL Infrastructure Overview",
+    "uid": null,
+    "version": 1
+}

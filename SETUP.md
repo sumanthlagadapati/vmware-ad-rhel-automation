@@ -42,5 +42,20 @@ This guide covers the prerequisites and configuration steps required to use the 
 - Port 389/636 (LDAP/S) for Active Directory.
 - Port 22 (SSH) for Linux management.
 
+## 📊 Monitoring (Grafana)
+
+This repository includes pre-built dashboards for visualizing infrastructure health.
+
+### Importing the AD Dashboard
+1. Open your Grafana instance.
+2. Navigate to **Dashboards** > **Import**.
+3. Upload the `ad-cpu-memory-disk-error.json` file from the `grafana-dashboards/` directory.
+4. Select your **Prometheus** data source.
+5. Click **Import**.
+
+> [!NOTE]
+> These dashboards require the `windows_exporter` to be running on your Active Directory servers and configured as a job in Prometheus.
+
 ---
 For script-specific details, refer to the comments within each file in the `scripts/` directory.
+
