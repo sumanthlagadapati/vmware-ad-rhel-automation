@@ -14,7 +14,56 @@ This repository provides production-ready scripts and configurations to streamli
 - **`scripts/powershell/`**: Windows Server and Active Directory reporting and management.
 - **`scripts/python/`**: vSphere automation (VM provisioning, snapshots, etc.) using `pyVmomi`.
 
+## 🏗️ Architecture
+
+```mermaid
+graph TD
+    subgraph Repo ["Project Repository"]
+        Op["Operator"]
+        Bash["RHEL Hardening (Bash)"]
+        PS1["AD User Report (PS1)"]
+        CLI["Main Entrypoint (CLI)"]
+        Python["Python VM Provisioner"]
+    end
+
+    subgraph Linux ["Linux Infrastructure"]
+        Host["RHEL Host"]
+        Services["System Services"]
+        FW["Firewalld"]
+        SSH["SSH Config"]
+        Logs["Log File"]
+    end
+
+    subgraph Windows ["Active Directory"]
+        AD["Active Directory"]
+        CSV["CSV Export"]
+    end
+
+    subgraph VMware ["vSphere Environment"]
+        VC["vCenter"]
+        SDK["pyVmomi SDK"]
+    end
+
+    Op --> Bash
+    Op --> PS1
+    Op --> CLI
+
+    Bash -->|dnf/sysctl| Host
+    Bash -->|systemctl| Services
+    Bash -->|firewall-cmd| FW
+    Bash -->|config| SSH
+    Bash -->|auditd| Logs
+
+    PS1 -->|LDAP/WinRM| AD
+    PS1 -->|Export| CSV
+
+    CLI -->|Env| Python
+    Python -->|HTTPS| VC
+    Python --> SDK
+```
+
 ## ✨ Key Features
+
 
 - **Automated Testing**: Integrated GitHub Actions for Python scripts.
 - **Observability**: Ready-to-import Grafana dashboards for AD health monitoring (CPU, Memory, Disk, Errors).
