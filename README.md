@@ -24,6 +24,7 @@ graph TD
         PS1["AD User Report (PS1)"]
         CLI["Main Entrypoint (CLI)"]
         Python["Python VM Provisioner"]
+        Terraform["Terraform Provider"]
     end
 
     subgraph Linux ["Linux Infrastructure"]
@@ -47,6 +48,7 @@ graph TD
     Op --> Bash
     Op --> PS1
     Op --> CLI
+    Op --> Terraform
 
     Bash -->|dnf/sysctl| Host
     Bash -->|systemctl| Services
@@ -60,6 +62,7 @@ graph TD
     CLI -->|Env| Python
     Python -->|HTTPS| VC
     Python --> SDK
+    Terraform --> VC
 ```
 
 ## ✨ Key Features
@@ -69,6 +72,7 @@ graph TD
 - **Observability**: Ready-to-import Grafana dashboards for AD health monitoring (CPU, Memory, Disk, Errors).
 - **Environment Management**: Modern Python management using `uv`.
 - **Infrastructure as Code**: Structured components for repeatable deployments.
+- **Terraform Provider**: Infrastructure reprovisioning using [Terraform](./terraform/main.tf) and the vSphere provider.
 
 ## 🛠️ Getting Started
 

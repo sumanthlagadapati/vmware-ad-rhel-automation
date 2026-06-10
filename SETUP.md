@@ -23,6 +23,32 @@ This guide covers the prerequisites and configuration steps required to use the 
   - Run scripts: `uv run scripts/python/vm-provisioner.py [args]`
 - vCenter access with appropriate permissions for VM management.
 
+### 4. Terraform (Infrastructure as Code)
+- Terraform 1.0+
+- Access to vSphere/vCenter with permissions to provision VMs and manage infrastructure.
+- See [`terraform/README.md`](./terraform/README.md) for usage instructions.
+
+#### Destroying Infrastructure
+To destroy all resources managed by this Terraform configuration, you can use the provided automation script:
+
+```sh
+bash scripts/bash/terraform-destroy.sh
+```
+
+This script will initialize Terraform (if needed) and destroy all resources with no manual confirmation required.
+
+- Alternatively, you can run the commands manually:
+
+  ```sh
+  cd terraform
+  terraform destroy
+  ```
+
+- You will be prompted to confirm before resources are deleted (unless using the script).
+- Ensure you are in the `terraform` directory and using the correct workspace/environment.
+- This will remove all infrastructure defined in your Terraform state.
+- **Warning:** This will remove all resources managed by Terraform. Use with caution.
+
 ## 🔐 Security & Credentials
 
 **DO NOT hardcode credentials.** 
@@ -58,4 +84,3 @@ This repository includes pre-built dashboards for visualizing infrastructure hea
 
 ---
 For script-specific details, refer to the comments within each file in the `scripts/` directory.
-
